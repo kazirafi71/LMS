@@ -3,7 +3,7 @@ import React from 'react';
 import Styles from './CourseCard.module.css'
 
 
-const CourseCard = () => {
+const CourseCard = ({title,name}) => {
     return (
         <>
         <div className={Styles.course__Card}>

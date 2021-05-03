@@ -19,3 +19,19 @@
     color: rgb(0, 0, 0);
     
 }
+
+.dropdown__style{
+    width: 60px;
+    height: 40px;
+    background-color: #6C757D;
+    color: white;
+    border-radius: 7px;
+    border: none;
+}
+
+.dropdown__style:hover{
+    background-color: white;
+    color: black;
+    border: 1px solid gray;
+    transition: all 0.3s ease-in;
+}

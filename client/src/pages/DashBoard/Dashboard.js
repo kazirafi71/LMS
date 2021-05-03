@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PersonIcon from "@material-ui/icons/Person";
@@ -25,8 +25,22 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import CourseCard from "./CourseCard/CourseCard";
 import SideCalender from "../../components/Calender/SideCalender";
 import RightSidebar from "./RightSidebar/RightSidebar";
+import courseData from "./FakeData.js/CourseData";
 
 const Dashboard = () => {
+  const [pageValue, setPageValue] = useState(5);
+  const [courseCardData, setCourseData] = useState(courseData);
+
+  useEffect(() => {
+    if (pageValue == "All") {
+      setCourseData(courseData);
+    } else {
+      let num = parseInt(pageValue);
+      const newData = courseData.slice(0, num);
+      setCourseData(newData);
+    }
+  }, [pageValue]);
+
   return (
     <div className="dashboard">
       <div className="left__sidebar__dashboard">
@@ -50,7 +64,7 @@ const Dashboard = () => {
           </div>
         </Container>
 
-        <div className="d-flex justify-content-center flex-wrap ">
+        <div className="d-flex flex-wrap justify-content-center">
           <Body4Card
             link="/messages"
             shortTitle="Communicate"
@@ -108,39 +122,28 @@ const Dashboard = () => {
               <Container className="mt-5">
                 <Paper className="d-flex justify-content-between align-items-center p-4">
                   <Typography variant="h6">Courses</Typography>
-
-                  {/* <div className={styles.icon__style}>
-                    <Button
-                      className="my-2 mb-5"
-                      color="primary"
-                      variant="contained"
-                    >
-                      Customize This Page
-                    </Button>
-                    <Button
-                      className="my-2 mb-5"
-                      color="primary"
-                      variant="contained"
-                    >
-                      Customize This Page
-                    </Button>
-                  </div> */}
                 </Paper>
                 <Divider />
-                <CourseCard />
-                <CourseCard />
-                <CourseCard />
-                <CourseCard />
-                <CourseCard />
-                <CourseCard />
-                <CourseCard />
+                {courseCardData &&
+                  courseCardData.map(({ title, name }) => {
+                    return <CourseCard title={title} name={name} />;
+                  })}
+                  <div className=" d-flex align-items-center my-2">
+                  <Typography className='mr-3'  variant='subtitle1'>Show</Typography>
+                <select className={styles.dropdown__style} onChange={(e) => setPageValue(e.target.value)}>
+                  {[5, 10, 20, "All"].map((val) => {
+                    return <option key={val}>{val}</option>;
+                  })}
+                </select>
+                  </div>
+                
               </Container>
             </Col>
 
             {/* TODO:Right Sidebar */}
 
             <Col md={3}>
-              <RightSidebar/>
+              <RightSidebar />
             </Col>
           </Row>
         </Container>
