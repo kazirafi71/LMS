@@ -1,0 +1,21 @@
+.dashboard__header__name{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #E1E6EF;
+    
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 50px 0px;
+}
+.dashboard__header__name>h2{
+    margin-top: 5px;
+}
+.dashboard__header__name>a{
+    color: rgba(0, 0, 0, 0.603);
+    text-decoration: none;
+}
+.dashboard__header__name>a:hover{
+    color: rgb(0, 0, 0);
+    
+}

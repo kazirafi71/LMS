@@ -1,0 +1,50 @@
+.dashboard{
+    display: flex;
+    background-color: #F7F7F7;
+    
+}
+
+.left__sidebar__dashboard{
+    padding-top: 40px;
+    flex: 0.2;
+    position: fixed;
+    box-shadow: 0px 5px 22px -13px grey;
+    height: 100vh;
+    width: 200px;
+    background-color: white;
+    
+}
+
+.main__body__dashboard{
+    flex: 1;
+    margin-left: 200px;
+    padding-right: 20px;
+    padding-left: 20px;
+    
+}
+
+.right__sidebar__dashboard{
+    flex: 0.2;
+    
+    
+}
+
+@media screen and (max-width: 768px) {
+    .left__sidebar__dashboard{
+       display: none;
+       flex: 0;
+      
+        
+    }
+    .main__body__dashboard{
+        flex: 1;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    
+    .right__sidebar__dashboard{
+        display: none;
+        
+        
+    }
+}

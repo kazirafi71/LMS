@@ -1,0 +1,38 @@
+.course__Card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    cursor: pointer;
+    padding: 20px 0px;
+}
+
+.course__Card>img{
+    border-radius: 40px;
+    width: 250px;
+    object-fit: contain;
+    padding: 20px;
+}
+
+.course__content>span{
+    color: gray;
+}
+
+.course__Card:hover{
+    background-color: transparent;
+}
+
+@media screen and (max-width:768px) {
+    .course__Card{
+        display: flex;
+        flex-direction: column !important;
+    }
+    .course__Card>img{
+        border-radius: 30px;
+        width:100%;
+        object-fit: contain;
+        padding: 20px;
+    }
+    
+}

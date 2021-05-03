@@ -1,0 +1,15 @@
+.sidebar__dashboard__row{
+    
+    padding: 10px 10px;
+
+}
+
+.sidebar__dashboard__row>a{
+    text-decoration: none;
+    color: gray;
+   
+}
+
+.sidebar__dashboard__row>a>.MuiSvgIcon-root{
+    margin-right: 20px;
+}
