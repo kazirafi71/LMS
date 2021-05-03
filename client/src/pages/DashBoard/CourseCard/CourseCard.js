@@ -7,7 +7,14 @@ const CourseCard = () => {
     return (
         <>
         <div className={Styles.course__Card}>
-            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2ViJTIwZGV2ZWxvcG1lbnR8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt=""/>
+            <div className={Styles.container}>
+            <img className={Styles.image} src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2ViJTIwZGV2ZWxvcG1lbnR8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt=""/>
+            <div className={Styles.overlay}>
+            <p className={Styles.text}>View</p>
+            </div>
+            </div>
+            
+            
             <div className={Styles.course__content}>
                 <span>Jan-Jun 2021</span>
                 <h5>ICE3101_12539_B</h5>

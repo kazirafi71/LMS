@@ -23,6 +23,8 @@ import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined"
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import CourseCard from "./CourseCard/CourseCard";
+import SideCalender from "../../components/Calender/SideCalender";
+import RightSidebar from "./RightSidebar/RightSidebar";
 
 const Dashboard = () => {
   return (
@@ -107,7 +109,7 @@ const Dashboard = () => {
                 <Paper className="d-flex justify-content-between align-items-center p-4">
                   <Typography variant="h6">Courses</Typography>
 
-                  <div className={styles.icon__style}>
+                  {/* <div className={styles.icon__style}>
                     <Button
                       className="my-2 mb-5"
                       color="primary"
@@ -122,7 +124,7 @@ const Dashboard = () => {
                     >
                       Customize This Page
                     </Button>
-                  </div>
+                  </div> */}
                 </Paper>
                 <Divider />
                 <CourseCard />
@@ -137,7 +139,9 @@ const Dashboard = () => {
 
             {/* TODO:Right Sidebar */}
 
-            <Col md={3}></Col>
+            <Col md={3}>
+              <RightSidebar/>
+            </Col>
           </Row>
         </Container>
       </div>
