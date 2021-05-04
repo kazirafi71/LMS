@@ -65,12 +65,19 @@
 .menu__toggle__icon{
     display: none;
 }
+.logout__button{
+    display: none;
+}
 
 @media screen and (max-width: 768px) {
     .right__header{
         display: none;
         
     }
+    .logout__button{
+        display: block;
+    }
+    
 
     .middle__header>ul{
         position: fixed;

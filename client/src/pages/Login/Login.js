@@ -40,15 +40,15 @@ const Login = () => {
         if (result.errors) {
           setError(result.errors);
         } else {
-          dispatch({ type: "SET__USER", payload: result.userInfo });
-          localStorage.setItem("auth_token", result.token);
-          localStorage.setItem("user", JSON.stringify(result.userInfo));
+          
           setToast(true);
-          // setError(null);
-          //    setTimeout(() => {
-          //     history.push("/");
-          //    }, 3000);
-          //    clearTimeout();
+          setError(null);
+             setTimeout(() => {
+              dispatch({ type: "SET__USER", payload: result.userInfo });
+              localStorage.setItem("auth_token", result.token);
+              localStorage.setItem("user", JSON.stringify(result.userInfo));
+             }, 3000);
+             clearTimeout();
         }
       })
       .catch((err) => {
@@ -57,8 +57,6 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log(user)
-      console.log(user.role)
     if(user && user.role=="Student")
     {
       history.push('/')
@@ -71,8 +69,7 @@ const Login = () => {
     {
       history.push('/teacher-dashboard')
     }
-
-  }, [user]);
+  }, [user])
   return (
     <div style={{ fontFamily: "Poppins" }}>
       <Container>

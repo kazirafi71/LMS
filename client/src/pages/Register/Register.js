@@ -5,6 +5,7 @@ import Alert_Comp from "../../components/Alert/Alert_Comp";
 import Spinner_comp from "../../components/Spinner/Spinner_comp";
 import Toast_Comp from "../../components/Toast/Toast_Comp";
 import { Link, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Register = () => {
   const [userName, setUserName] = useState("");
@@ -16,7 +17,7 @@ const Register = () => {
   const [toast, setToast] = useState(false);
   const history = useHistory();
 
-  
+  const {user} = useSelector((state) => state.auth);
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -51,7 +52,23 @@ const Register = () => {
       .catch((err) => {
         console.log(err);
       });
-  };
+  }
+
+  useEffect(() => {
+    if(user && user.role=="Student")
+    {
+      history.push('/')
+    }
+    else if(user && user.role==="Admin")
+    {
+      history.push('/admin-dashboard')
+    }
+    else if(user && user.role==="Teacher")
+    {
+      history.push('/teacher-dashboard')
+    }
+
+  }, [user])
 
   return (
     <div style={{ fontFamily: "Poppins" }}>

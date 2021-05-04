@@ -53,7 +53,13 @@ const Dashboard = () => {
           title="Preferences"
           link="/preferences"
         />
-        <Sidebar Icon={ExitToAppIcon} title="Logout" link="/logout" />
+        <Sidebar
+          onClick={() => {
+            alert("hi");
+          }}
+          Icon={ExitToAppIcon}
+          title="Logout"
+        />
       </div>
 
       <div className="main__body__dashboard">
@@ -124,19 +130,31 @@ const Dashboard = () => {
                   <Typography variant="h6">Courses</Typography>
                 </Paper>
                 <Divider />
+
                 {courseCardData &&
                   courseCardData.map(({ title, name }) => {
-                    return  <CourseCard title={title} name={name} id={1} />;
+                    return (
+                      <CourseCard
+                        key={Math.random(2) * 10}
+                        title={title}
+                        name={name}
+                        id={1}
+                      />
+                    );
                   })}
-                  <div className=" d-flex align-items-center my-2">
-                  <Typography className='mr-3'  variant='subtitle1'>Show</Typography>
-                <select className={styles.dropdown__style} onChange={(e) => setPageValue(e.target.value)}>
-                  {[5, 10, 20, "All"].map((val) => {
-                    return <option key={val}>{val}</option>;
-                  })}
-                </select>
-                  </div>
-                
+                <div className=" d-flex align-items-center my-2">
+                  <Typography className="mr-3" variant="subtitle1">
+                    Show
+                  </Typography>
+                  <select
+                    className={styles.dropdown__style}
+                    onChange={(e) => setPageValue(e.target.value)}
+                  >
+                    {[5, 10, 20, "All"].map((val) => {
+                      return <option key={val}>{val}</option>;
+                    })}
+                  </select>
+                </div>
               </Container>
             </Col>
 
