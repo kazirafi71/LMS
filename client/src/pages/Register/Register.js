@@ -16,7 +16,7 @@ const Register = () => {
   const [toast, setToast] = useState(false);
   const history = useHistory();
 
-  console.log(error);
+  
 
   const formSubmitHandler = (e) => {
     e.preventDefault();

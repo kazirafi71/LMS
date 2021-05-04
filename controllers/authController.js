@@ -9,11 +9,10 @@ module.exports.register__controller = async (req, res, next) => {
     const { userName, email, password, confirmPassword } = req.body;
 
     const userInfo = await UserModel.findOne({ email });
-   
+
     if (userInfo) {
-      
       return res.status(401).json({
-        errors: {user: "User already exists"} ,
+        errors: { user: "User already exists" },
       });
     }
     const hash = await bcrypt.hash(password, 10);
@@ -38,6 +37,8 @@ module.exports.register__controller = async (req, res, next) => {
   }
 };
 
+//TODO: Login Controller
+
 module.exports.login__controller = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -45,7 +46,9 @@ module.exports.login__controller = async (req, res, next) => {
     const userInfo = await UserModel.findOne({ email });
 
     if (!userInfo) {
-      controllerError((error = null), res, "User not exists");
+      return res.status(401).json({
+        errors: { userExist: "User not exist" },
+      });
     }
 
     // console.log(userInfo)
@@ -53,7 +56,9 @@ module.exports.login__controller = async (req, res, next) => {
       .compare(password, userInfo.password)
       .then((result) => {
         if (!result) {
-          controllerError(err, res, "Password not matched");
+          return res.status(401).json({
+            errors: { password: "password not matched" },
+          });
         }
         const token = jwt.sign({ _id: userInfo._id }, SECRET_KEY);
         return res.status(200).json({
