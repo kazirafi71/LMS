@@ -43,7 +43,7 @@ module.exports.login__controller = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    const userInfo = await UserModel.findOne({ email });
+    const userInfo = await (await UserModel.findOne({ email }));
 
     if (!userInfo) {
       return res.status(401).json({
@@ -60,9 +60,12 @@ module.exports.login__controller = async (req, res, next) => {
             errors: { password: "password not matched" },
           });
         }
-        const token = jwt.sign({ _id: userInfo._id }, SECRET_KEY);
+
+        userInfo.password=undefined
+        
+        const token = jwt.sign({ _id: userInfo._id,name: userInfo.userName,email: userInfo.email,role: userInfo.role }, SECRET_KEY);
         return res.status(200).json({
-          text: "Login successful",
+          userInfo,
           token,
         });
       })

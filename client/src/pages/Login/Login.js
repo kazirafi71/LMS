@@ -1,4 +1,4 @@
-import Styles from './login.module.css'
+import Styles from "./login.module.css";
 import { Button, Container, Paper, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
@@ -6,17 +6,20 @@ import Alert_Comp from "../../components/Alert/Alert_Comp";
 import Spinner_comp from "../../components/Spinner/Spinner_comp";
 import Toast_Comp from "../../components/Toast/Toast_Comp";
 import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    
-    const [error, setError] = useState();
-    const [loading, setLoading] = useState(false);
-    const [toast, setToast] = useState(false);
-    const history = useHistory();
+  const [email, setEmail] = useState("test@gmail.com");
+  const [password, setPassword] = useState("123456");
+  const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
+  const [toast, setToast] = useState(false);
+  const history = useHistory();
+  const {user} = useSelector((state) => state.auth);
+  //console.log(user);
 
-    
+  const dispatch = useDispatch();
+
   const formSubmitHandler = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -26,33 +29,52 @@ const Login = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        
         email,
         password,
-        
       }),
     })
       .then((res) => res.json())
       .then((result) => {
         setLoading(false);
-        console.log(result);
+        // console.log(result);
         if (result.errors) {
           setError(result.errors);
         } else {
+          dispatch({ type: "SET__USER", payload: result.userInfo });
+          localStorage.setItem("auth_token", result.token);
+          localStorage.setItem("user", JSON.stringify(result.userInfo));
           setToast(true);
-          setError(null);
-        //    setTimeout(() => {
-        //     history.push("/");
-        //    }, 3000);
-        //    clearTimeout();
+          // setError(null);
+          //    setTimeout(() => {
+          //     history.push("/");
+          //    }, 3000);
+          //    clearTimeout();
         }
       })
       .catch((err) => {
         console.log(err);
       });
   };
-    return (
-        <div style={{ fontFamily: "Poppins" }}>
+
+  useEffect(() => {
+    console.log(user)
+      console.log(user.role)
+    if(user && user.role=="Student")
+    {
+      history.push('/')
+    }
+    else if(user && user.role==="Admin")
+    {
+      history.push('/admin-dashboard')
+    }
+    else if(user && user.role==="Teacher")
+    {
+      history.push('/teacher-dashboard')
+    }
+
+  }, [user]);
+  return (
+    <div style={{ fontFamily: "Poppins" }}>
       <Container>
         <Toast_Comp
           setToast={setToast}
@@ -74,10 +96,10 @@ const Login = () => {
               )}
 
               <Form onSubmit={formSubmitHandler}>
-                
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control
+                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     type="email"
                     placeholder="Enter email"
@@ -87,6 +109,7 @@ const Login = () => {
                 <Form.Group controlId="formBasicPassword">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
+                    value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     type="password"
                     placeholder="Password"
@@ -95,7 +118,7 @@ const Login = () => {
                     {error && error.password}
                   </span>
                 </Form.Group>
-                
+
                 <Typography style={{ color: "GrayText" }} variant="subtitle2">
                   Don't Have an account?
                   <Link to="/register">Register Here</Link>
@@ -114,7 +137,7 @@ const Login = () => {
         </Row>
       </Container>
     </div>
-    );
+  );
 };
 
 export default Login;
