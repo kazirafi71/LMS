@@ -9,6 +9,8 @@ import Grades from "./pages/Grades/Grades";
 import Profile from "./pages/Profile/Profile";
 import Header from "./components/Header/Header";
 import CourseInfo from "./pages/CourseInfo/CourseInfo";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 
 function App() {
   return <div className="App">
@@ -29,6 +31,12 @@ function App() {
         </Route>
         <Route exact path='/grades'>
           <Grades/>
+        </Route>
+        <Route exact path='/login'>
+          <Login/>
+        </Route>
+        <Route exact path='/register'>
+          <Register/>
         </Route>
         <Route exact path='/course/:courseId'>
           <CourseInfo/>

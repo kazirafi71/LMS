@@ -126,7 +126,7 @@ const Dashboard = () => {
                 <Divider />
                 {courseCardData &&
                   courseCardData.map(({ title, name }) => {
-                    return <CourseCard title={title} name={name} />;
+                    return  <CourseCard title={title} name={name} id={1} />;
                   })}
                   <div className=" d-flex align-items-center my-2">
                   <Typography className='mr-3'  variant='subtitle1'>Show</Typography>
@@ -142,7 +142,7 @@ const Dashboard = () => {
 
             {/* TODO:Right Sidebar */}
 
-            <Col md={3}>
+            <Col md={3} xm={12}>
               <RightSidebar />
             </Col>
           </Row>

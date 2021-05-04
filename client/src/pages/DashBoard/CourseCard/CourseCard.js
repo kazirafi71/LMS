@@ -1,18 +1,19 @@
 import { Button, Divider } from '@material-ui/core';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Styles from './CourseCard.module.css'
 
 
-const CourseCard = ({title,name}) => {
+const CourseCard = ({title,name,id}) => {
     return (
         <>
         <div className={Styles.course__Card}>
-            <div className={Styles.container}>
+            <Link to={`/course/${id}`} className={Styles.container}>
             <img className={Styles.image} src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2ViJTIwZGV2ZWxvcG1lbnR8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60" alt=""/>
             <div className={Styles.overlay}>
             <p className={Styles.text}>View</p>
             </div>
-            </div>
+            </Link>
             
             
             <div className={Styles.course__content}>
