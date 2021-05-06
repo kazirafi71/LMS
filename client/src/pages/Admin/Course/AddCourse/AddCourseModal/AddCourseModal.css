@@ -1,0 +1,14 @@
+.input__file{
+    position: relative !important;
+
+}
+
+.inputfile__style {
+	width: 200px;
+	height: 100px;
+	background-color: gray;
+    position: absolute;
+}
+
+
+

@@ -1,0 +1,13 @@
+.icon__style{
+    font-size: 150px !important;
+    color: white !important;
+    
+    
+}
+
+.child__div{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}

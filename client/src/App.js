@@ -22,6 +22,7 @@ import { useDispatch } from "react-redux";
 import StudentRoute from "./components/PrivateRoute/StudentRoute";
 import TeacherRoute from "./components/PrivateRoute/TeacherRoute";
 import AdminRoute from "./components/PrivateRoute/AdminRoute";
+import AdminCourseInfo from "./pages/Admin/Course/AdminCourseInfo";
 
 const Routing = () => {
   const history = useHistory();
@@ -45,6 +46,9 @@ const Routing = () => {
       </TeacherRoute>
       <AdminRoute exact path="/admin-dashboard">
         <AdminDashboard />
+      </AdminRoute>
+      <AdminRoute exact path="/admin/course-info">
+        <AdminCourseInfo />
       </AdminRoute>
       <StudentRoute exact path="/messages">
         <Messages />

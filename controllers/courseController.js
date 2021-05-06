@@ -3,7 +3,13 @@ const CourseModel = require("../model/CourseModel");
 module.exports.postCourse__controller = async (req, res, next) => {
   try {
     const { courseDescription, courseName } = req.body;
-    const { courseThumbnail } = req.file;
+    
+
+    if(!courseDescription || !courseName || !req.file){
+      return res.status(400).json({
+        error: "Please Provide All Information",
+      });
+    }
 
     const url = req.protocol + "://" + req.get("host");
 
