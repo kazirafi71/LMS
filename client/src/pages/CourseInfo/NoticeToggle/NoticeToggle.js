@@ -26,8 +26,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NoticeToggle = () => {
+
+
+const NoticeToggle = ({exp}) => {
     const classes = useStyles();
+  
     return (
         <div>
           {

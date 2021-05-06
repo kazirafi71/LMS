@@ -41,10 +41,10 @@
         margin-left: 0px;
         margin-right: 0px;
     }
-    
     .right__sidebar__dashboard{
-        display: none;
+        flex: 1;
         
         
     }
+    
 }

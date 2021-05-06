@@ -1,7 +1,7 @@
-const User = require('../model/userModel')
+const User = require('../model/UserModel')
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
-const {JWT_TOKEN}=require('../config/keys')
+const {SECRET_KEY}=require('../config/keys')
 
 module.exports={
     requireLogin(req,res,next){
@@ -12,7 +12,8 @@ module.exports={
             })
         }
         const token=authorization.split(' ')[1]
-        jwt.verify(token,JWT_TOKEN,(err,payload)=>{
+        
+        jwt.verify(token,SECRET_KEY,(err,payload)=>{
             if(err){
                 return res.status(401).json({
                     error:"You must be logged in"
@@ -22,7 +23,7 @@ module.exports={
             User.findById({_id})
             .then(userData=>{
                 req.user=userData
-                console.log(req.user)
+                // console.log(req.user)
                 next()
             })
         })

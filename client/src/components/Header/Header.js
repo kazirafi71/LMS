@@ -12,8 +12,8 @@ import NotesIcon from "@material-ui/icons/Notes";
 import { useDispatch } from "react-redux";
 
 const Header = () => {
-  const history=useHistory()
-  const dispatch=useDispatch()
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [toggle, setToggle] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
   return (
@@ -34,25 +34,47 @@ const Header = () => {
       >
         {user && (
           <ul>
+            {
+              user.role==="Teacher" && <li>
+              <NavLink to="/teacher-dashboard">Dashboard</NavLink>
+            </li>
+            }
+            {
+              user.role==="Admin" && <li>
+              <NavLink to="/admin-dashboard">Dashboard</NavLink>
+            </li>
+            }
+            {
+              user.role==="Student" && <li>
+              <NavLink to="/">Dashboard</NavLink>
+            </li>
+            }
+            
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
             <li>
               <NavLink to="/all-courses">All Courses</NavLink>
             </li>
             <li>
               <NavLink to="/ucam">UCAM</NavLink>
             </li>
-            <li>
-              <NavLink to="/dashboard">BUP HOME</NavLink>
-            </li>
+
             <li>
               <NavLink to="/library">LIBRARY</NavLink>
             </li>
+
             <li className="logout__button">
-              <Button onClick={()=>{
-                localStorage.clear("user")
-                localStorage.clear("auth_token")
-                dispatch({type:"CLEAR__USER"})
-                history.push('/login')
-              }}>Logout</Button>
+              <Button
+                onClick={() => {
+                  localStorage.clear("user");
+                  localStorage.clear("auth_token");
+                  dispatch({ type: "CLEAR__USER" });
+                  history.push("/login");
+                }}
+              >
+                Logout
+              </Button>
             </li>
           </ul>
         )}
@@ -71,7 +93,9 @@ const Header = () => {
           <IconButton>
             <SettingsIcon />
           </IconButton>
-          <Avatar>R</Avatar>
+          <Link to="/profile">
+            <Avatar>R</Avatar>
+          </Link>
         </div>
       ) : (
         <div className="d-flex list-unstyled">

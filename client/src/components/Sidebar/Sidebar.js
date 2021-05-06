@@ -4,14 +4,14 @@ import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import "./Sidebar.css";
 
-const Sidebar = ({ title, link, Icon }) => {
+const Sidebar = ({ title, link, Icon ,admin }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
   return (
     <div className="sidebar__dashboard__row">
       {title === "Logout" ? (
-        <div>
+        <div className='d-flex' >
           <Icon style={{ color: "gray", marginRight:"10px"}} />
           <Button
             onClick={() => {
@@ -21,11 +21,11 @@ const Sidebar = ({ title, link, Icon }) => {
               history.push("/login");
             }}
           >
-            {title}
+            <span color=""> {title}</span> 
           </Button>
         </div>
       ) : (
-        <Link to={`${link}`}>
+        <Link  to={`${link}`}>
           <Icon />
           {title}
         </Link>

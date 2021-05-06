@@ -26,6 +26,8 @@ import CourseCard from "./CourseCard/CourseCard";
 import SideCalender from "../../components/Calender/SideCalender";
 import RightSidebar from "./RightSidebar/RightSidebar";
 import courseData from "./FakeData.js/CourseData";
+import { useSelector } from "react-redux";
+import Spinner_comp from "../../components/Spinner/Spinner_comp";
 
 const Dashboard = () => {
   const [pageValue, setPageValue] = useState(5);
@@ -40,6 +42,7 @@ const Dashboard = () => {
       setCourseData(newData);
     }
   }, [pageValue]);
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <div className="dashboard">
@@ -53,24 +56,18 @@ const Dashboard = () => {
           title="Preferences"
           link="/preferences"
         />
-        <Sidebar
-          onClick={() => {
-            alert("hi");
-          }}
-          Icon={ExitToAppIcon}
-          title="Logout"
-        />
+        <Sidebar Icon={ExitToAppIcon} title="Logout" />
       </div>
 
       <div className="main__body__dashboard">
         <Container>
           <div className={styles.dashboard__header__name}>
-            <h2 className={styles.dashboard__name}>Kazi Musaddi Rafi</h2>
+            <h2 className={styles.dashboard__name}>{user && user.userName}</h2>
             <Link to="/">Dashboard</Link>
           </div>
         </Container>
 
-        <div className="d-flex flex-wrap justify-content-center">
+        <div className="d-flex flex-wrap justify-content-md-between justify-content-md-end">
           <Body4Card
             link="/messages"
             shortTitle="Communicate"
@@ -98,7 +95,7 @@ const Dashboard = () => {
 
         <Container fluid className="my-5">
           <Row>
-            <Col md={9} sm={12}>
+            <Col md={9} xs={12} sm={12}>
               <Container>
                 <Button
                   className="my-2 mb-5"
@@ -107,20 +104,27 @@ const Dashboard = () => {
                 >
                   Customize This Page
                 </Button>
-                <Paper className="d-flex justify-content-between align-items-center p-4">
-                  <Typography variant="h6">
-                    Recently accessed courses
-                  </Typography>
+                <div>
+                  <Row>
+                    <Col>
+                      <Paper className="d-flex justify-content-between align-items-center p-2 flex-wrap">
+                        <Typography variant="h6">
+                          Recently accessed courses
+                        </Typography>
 
-                  <div className={styles.icon__style}>
-                    <IconButton>
-                      <ArrowBackIosIcon />
-                    </IconButton>
-                    <IconButton>
-                      <ArrowForwardIosIcon />
-                    </IconButton>
-                  </div>
-                </Paper>
+                        <div className={styles.icon__style}>
+                          <IconButton>
+                            <ArrowBackIosIcon />
+                          </IconButton>
+                          <IconButton>
+                            <ArrowForwardIosIcon />
+                          </IconButton>
+                        </div>
+                      </Paper>
+                    </Col>
+                  </Row>
+                </div>
+
                 <Divider />
                 <CourseCard />
               </Container>
@@ -142,6 +146,7 @@ const Dashboard = () => {
                       />
                     );
                   })}
+
                 <div className=" d-flex align-items-center my-2">
                   <Typography className="mr-3" variant="subtitle1">
                     Show
@@ -160,7 +165,7 @@ const Dashboard = () => {
 
             {/* TODO:Right Sidebar */}
 
-            <Col md={3} xm={12}>
+            <Col className=" right__sidebar__dashboard " md={3} xs={12} sm={12}>
               <RightSidebar />
             </Col>
           </Row>
