@@ -25,36 +25,43 @@ const CardOfAllCourse = () => {
   useEffect(() => {
     dispatch(fetchCourseInfo());
   }, []);
-  console.log(courseInfo);
 
   return (
     <Container>
-      <Row className='g-4'>
-        {
-                  courseInfo.length>0 ? courseInfo.map(val=>{
-                      return( <Col className='g-4' md={4}>
-                        <Card className={classes.root}>
-                <CardActionArea>
-                  <CardMedia
-                    className={classes.media}
-                    image={val.courseThumbnail}
-                    title="Contemplative Reptile"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {val.courseName}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                      {val.courseDescription}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-                        </Col>)
-                  })
-                  : <Spinner_comp/>
-              }
-             
+      <Row className="g-4">
+        {courseInfo.length > 0 ? (
+          courseInfo.map((val) => {
+            return (
+              <Col key={val._id} className="g-4" md={4}>
+                <Card className="m-3">
+                  <CardActionArea>
+                    <CardMedia
+                      className={classes.media}
+                      image={val.courseThumbnail}
+                      title="Contemplative Reptile"
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {val.courseName}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                      >
+                        {val.courseDescription}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Col>
+            );
+          })
+        ) : (
+          <div className="d-flex justify-content-center align-items-center w-100 h-100">
+            <Spinner_comp />
+          </div>
+        )}
       </Row>
     </Container>
   );

@@ -25,24 +25,27 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import CourseCard from "./CourseCard/CourseCard";
 import SideCalender from "../../components/Calender/SideCalender";
 import RightSidebar from "./RightSidebar/RightSidebar";
-import courseData from "./FakeData.js/CourseData";
-import { useSelector } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
 import Spinner_comp from "../../components/Spinner/Spinner_comp";
+import { fetchCourseInfo } from "../../Redux/course/courseAction";
 
 const Dashboard = () => {
   const [pageValue, setPageValue] = useState(5);
-  const [courseCardData, setCourseData] = useState(courseData);
+  const { user } = useSelector((state) => state.auth);
+  const { courseInfo } = useSelector((state) => state.course);
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(1);
 
+  const dispatch = useDispatch();
   useEffect(() => {
-    if (pageValue == "All") {
-      setCourseData(courseData);
+    if (pageValue === "All") {
+      dispatch(fetchCourseInfo());
+      setPageValue(courseInfo.length);
     } else {
-      let num = parseInt(pageValue);
-      const newData = courseData.slice(0, num);
-      setCourseData(newData);
+      dispatch(fetchCourseInfo());
     }
   }, [pageValue]);
-  const { user } = useSelector((state) => state.auth);
 
   return (
     <div className="dashboard">
@@ -113,10 +116,33 @@ const Dashboard = () => {
                         </Typography>
 
                         <div className={styles.icon__style}>
-                          <IconButton>
+                          <IconButton
+                            onClick={() => {
+                              if (start==0 || end==0) {
+                                setEnd(courseInfo.length);
+                                setStart(courseInfo.length-1);
+                              } else {
+                               
+                                setStart(start - 1);
+                                setEnd(end - 1);
+                              }
+                              console.log(start,end)
+                            }}
+
+                          >
                             <ArrowBackIosIcon />
                           </IconButton>
-                          <IconButton>
+                          <IconButton
+                            onClick={() => {
+                              if (courseInfo.length == end) {
+                                setStart(0);
+                                setEnd(1);
+                              } else {
+                                setStart(start + 1);
+                                setEnd(end + 1);
+                              }
+                            }}
+                          >
                             <ArrowForwardIosIcon />
                           </IconButton>
                         </div>
@@ -126,7 +152,18 @@ const Dashboard = () => {
                 </div>
 
                 <Divider />
-                <CourseCard />
+                {courseInfo.length > 0 &&
+                  courseInfo.slice(start, end).map((val) => {
+                    return (
+                      <CourseCard
+                        key={Math.random(2) * 10}
+                        title={val.courseDescription}
+                        name={val.courseName}
+                        id={val._id}
+                        img={val.courseThumbnail}
+                      />
+                    );
+                  })}
               </Container>
 
               <Container className="mt-5">
@@ -135,14 +172,15 @@ const Dashboard = () => {
                 </Paper>
                 <Divider />
 
-                {courseCardData &&
-                  courseCardData.map(({ title, name }) => {
+                {courseInfo.length > 0 &&
+                  courseInfo.slice(0, pageValue).map((val) => {
                     return (
                       <CourseCard
                         key={Math.random(2) * 10}
-                        title={title}
-                        name={name}
-                        id={1}
+                        title={val.courseDescription}
+                        name={val.courseName}
+                        id={val._id}
+                        img={val.courseThumbnail}
                       />
                     );
                   })}
