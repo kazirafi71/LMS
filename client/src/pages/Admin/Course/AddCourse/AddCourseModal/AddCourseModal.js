@@ -5,6 +5,8 @@ import Axios from "axios";
 import Toast_Comp from "../../../../../components/Toast/Toast_Comp";
 import Spinner_comp from "../../../../../components/Spinner/Spinner_comp";
 import "./AddCourseModal.css";
+import { useDispatch } from "react-redux";
+import { fetchCourseInfo } from "../../../../../Redux/course/courseAction";
 
 const AddCourseModal = () => {
   const [show, setShow] = useState(false);
@@ -18,6 +20,8 @@ const AddCourseModal = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const dispatch=useDispatch()
 
   useEffect(() => {
     setImgLabel(courseThumbnail.name);
@@ -45,6 +49,8 @@ const AddCourseModal = () => {
         setCourseDescription('')
         setCourseName('')
         setCourseThumbnail('')
+        dispatch(fetchCourseInfo())
+        dispatch({type:"UPDATE__COURSE__LIST",payload: true})
       })
       .catch((err) => {
         console.log(err);

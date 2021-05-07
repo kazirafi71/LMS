@@ -25,6 +25,8 @@ import AdminRoute from "./components/PrivateRoute/AdminRoute";
 import AdminCourseInfo from "./pages/Admin/Course/AdminCourseInfo";
 import StudentInfo from "./pages/Admin/Student/StudentInfo";
 import TeacherInfo from "./pages/Admin/Teacher/TeacherInfo";
+import AllCourses from "./pages/All-Courses/AllCourses";
+import NotFound from "./pages/404NotFoud/NotFound";
 
 const Routing = () => {
   const history = useHistory();
@@ -77,8 +79,15 @@ const Routing = () => {
       <Route exact path="/register">
         <Register />
       </Route>
+      <Route exact path="/all-courses">
+        <AllCourses />
+      </Route>
       <Route exact path="/course/:courseId">
         <CourseInfo />
+      </Route>
+
+      <Route  path="*">
+        <NotFound />
       </Route>
     </Switch>
   );
