@@ -16,6 +16,10 @@ const Header = () => {
   const dispatch = useDispatch();
   const [toggle, setToggle] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
+  const toggleClose=()=>{
+    setToggle(false)
+    
+  }
   return (
     <div className="header">
       <div className="left__header">
@@ -36,33 +40,45 @@ const Header = () => {
           <ul>
             {
               user.role==="Teacher" && <li>
-              <NavLink to="/teacher-dashboard">Dashboard</NavLink>
+              <NavLink onClick={toggleClose} to="/teacher-dashboard">Dashboard</NavLink>
             </li>
             }
             {
-              user.role==="Admin" && <li>
-              <NavLink to="/admin-dashboard">Dashboard</NavLink>
+              user.role==="Admin" && <> <li >
+              <NavLink onClick={toggleClose} to="/admin-dashboard">Dashboard</NavLink>
             </li>
-            }
-            {
-              user.role==="Student" && <li>
-              <NavLink to="/">Dashboard</NavLink>
+            <li className="admin__toggle__menu">
+              <NavLink onClick={toggleClose} to="/admin/course-info">Course-Info</NavLink>
             </li>
-            }
+            <li className="admin__toggle__menu">
+              <NavLink onClick={toggleClose} to="/admin/student-info">Student-Info</NavLink>
+            </li>
+            <li className="admin__toggle__menu">
+              <NavLink onClick={toggleClose} to="/admin/teacher-info">Teacher-Info</NavLink>
+            </li>
             
-            <li>
-              <Link to="/profile">Profile</Link>
+            </>
+            }
+            {
+              user.role==="Student" &&<><li>
+              <NavLink onClick={toggleClose} to="/">Dashboard</NavLink>
             </li>
             <li>
-              <NavLink to="/all-courses">All Courses</NavLink>
-            </li>
-            <li>
-              <NavLink to="/ucam">UCAM</NavLink>
+              <NavLink onClick={toggleClose} to="/ucam">UCAM</NavLink>
             </li>
 
             <li>
-              <NavLink to="/library">LIBRARY</NavLink>
+              <NavLink onClick={toggleClose} to="/library">LIBRARY</NavLink>
+            </li> </> 
+            }
+            
+            <li>
+              <Link onClick={toggleClose} to="/profile">Profile</Link>
             </li>
+            <li>
+              <NavLink onClick={toggleClose} to="/all-courses">All Courses</NavLink>
+            </li>
+           
 
             <li className="logout__button">
               <Button

@@ -9,6 +9,7 @@ import CourseInfoTable from "./AddCourse/CourseInfoTable/CourseInfoTable";
 
 const AdminCourseInfo = () => {
   const [data, setData] = useState([]);
+  const [course, setCourse] = useState(false);
   useEffect(async () => {
     const courseData = await Axios.get("/get-courses", {
       headers: {
@@ -36,14 +37,16 @@ const AdminCourseInfo = () => {
                 </Typography>
               </Paper>
               <div className={Styles.add__course}>
-                <AddCourse />
+                <AddCourse course={course} setCourse={setCourse} />
               </div>
             </Container>
-            <Container>
-              <Row>
-                <CourseInfoTable  />
-              </Row>
-            </Container>
+            {course ? (
+              <Container>
+                <Row>
+                  <CourseInfoTable />
+                </Row>
+              </Container>
+            ) : null}
           </Col>
         </Row>
       </Container>

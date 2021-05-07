@@ -30,23 +30,23 @@ const useStyles = makeStyles({
   },
 });
 
-const CourseInfoTable = () => {
+const TeacherTable = () => {
   const classes = useStyles();
 
   const [data, setData] = useState([]);
 
   const userList = async () => {
-    const user = await Axios.get("/get-courses", {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("auth_token"),
-      },
-    });
-    setData(user.data.courses);
-    console.log(user.data.courses);
+    const user = await Axios.get("/users/teacher",{
+        headers:{
+            "Authorization":"Bearer "+localStorage.getItem("auth_token")
+        }
+    })
+    setData(user.data.teacherInfo)
+    //console.log(user.data.teacherInfo)
   };
 
   useEffect(() => {
-    userList();
+    userList()
   }, []);
 
   //   const classes = useStyles2();
@@ -74,14 +74,12 @@ const CourseInfoTable = () => {
                 Id
               </TableCell>
               <TableCell align="center" className="text-light">
-                CourseName
+                Teacher Name
               </TableCell>
               <TableCell align="center" className="text-light">
-                Course Thumbnail
+               Email
               </TableCell>
-              <TableCell align="center" className="text-light">
-                Created By
-              </TableCell>
+              
               <TableCell align="center" className="text-light">
                 Actions
               </TableCell>
@@ -97,20 +95,10 @@ const CourseInfoTable = () => {
                   {row._id}
                 </TableCell>
 
-                <TableCell align="center">{row.courseName}</TableCell>
+                <TableCell align="center">{row.userName}</TableCell>
                 <TableCell align="center">
-                  <img
-                    style={{
-                      height: "40px",
-                      width: "60px",
-                      objectFit: "contain",
-                    }}
-                    src={row.courseThumbnail}
-                    alt=""
-                  />
+                {row.email}
                 </TableCell>
-
-                <TableCell align="center">{row.createdAt.role}</TableCell>
                 <TableCell className="" align="center">
                   <IconButton>
                     <EditIcon color="primary" />
@@ -152,4 +140,4 @@ const CourseInfoTable = () => {
   );
 };
 
-export default CourseInfoTable;
+export default TeacherTable;

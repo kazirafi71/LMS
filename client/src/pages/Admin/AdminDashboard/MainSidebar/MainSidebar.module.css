@@ -1,11 +1,12 @@
 .adminSidebar {
-    box-shadow: 0px 0px 10px 2px rgba(173, 216, 230, 0.425);
+   
     position: fixed;
     top: 80px;
     z-index: 100;
-    background-color: white;
+   
     height: 100vh;
-    padding-right: 100px;
+    
+    
     
   }
   .sideBar{
@@ -15,7 +16,7 @@
   @media screen and (max-width: 768px) {
     .adminSidebar {
       
-      padding-right: 0px;
+      padding: 0px;
       
     }
   }

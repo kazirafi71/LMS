@@ -21,6 +21,7 @@ app.use(cors())
 
 app.use('/auth', require('./routes/authRoute'))
 app.use('/', require('./routes/courseRoute'))
+app.use('/users', require('./routes/userRoute'))
 
 
 

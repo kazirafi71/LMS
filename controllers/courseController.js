@@ -42,7 +42,7 @@ module.exports.postCourse__controller = async (req, res, next) => {
 
 module.exports.getCourses__controller = async (req, res, next) => {
   try {
-        const courses=await CourseModel.find()
+        const courses=await CourseModel.find().populate("createdAt","role _id userName email")
         return res.status(200).json({
             courses
           });

@@ -23,6 +23,8 @@ import StudentRoute from "./components/PrivateRoute/StudentRoute";
 import TeacherRoute from "./components/PrivateRoute/TeacherRoute";
 import AdminRoute from "./components/PrivateRoute/AdminRoute";
 import AdminCourseInfo from "./pages/Admin/Course/AdminCourseInfo";
+import StudentInfo from "./pages/Admin/Student/StudentInfo";
+import TeacherInfo from "./pages/Admin/Teacher/TeacherInfo";
 
 const Routing = () => {
   const history = useHistory();
@@ -49,6 +51,12 @@ const Routing = () => {
       </AdminRoute>
       <AdminRoute exact path="/admin/course-info">
         <AdminCourseInfo />
+      </AdminRoute>
+      <AdminRoute exact path="/admin/student-info">
+        <StudentInfo />
+      </AdminRoute>
+      <AdminRoute exact path="/admin/teacher-info">
+        <TeacherInfo />
       </AdminRoute>
       <StudentRoute exact path="/messages">
         <Messages />
