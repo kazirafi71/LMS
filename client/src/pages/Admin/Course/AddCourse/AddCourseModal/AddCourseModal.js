@@ -19,7 +19,8 @@ const AddCourseModal = () => {
   const [toast, setToast] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {setShow(true)
+ };
 
   const dispatch=useDispatch()
 

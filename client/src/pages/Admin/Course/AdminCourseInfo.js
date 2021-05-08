@@ -12,20 +12,11 @@ import { fetchCourseInfo } from "../../../Redux/course/courseAction";
 const AdminCourseInfo = () => {
   const [data, setData] = useState([]);
   const [course, setCourse] = useState(false);
-  const dispatch=useDispatch()
-  const courseData = useSelector(state => state.course.courseInfo)
-  console.log(courseData)
-  useEffect(async () => {
-    // const courseData = await Axios.get("/get-courses", {
-    //   headers: {
-    //     Authorization: "Bearer " + localStorage.getItem("auth_token"),
-    //   },
-    // });
+  const dispatch = useDispatch();
+  const courseData = useSelector((state) => state.course.courseInfo);
 
-    
-
-    dispatch(fetchCourseInfo())
-
+  useEffect(() => {
+    dispatch(fetchCourseInfo());
   }, []);
   return (
     <>

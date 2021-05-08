@@ -19,12 +19,17 @@ const useStyles = makeStyles({
 });
 const CardOfAllCourse = () => {
   const classes = useStyles();
+  const [enroll,setEnroll]=useState(false)
 
   const { courseInfo } = useSelector((state) => state.course);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchCourseInfo());
   }, []);
+  const enrollHandler=(id)=>{
+   
+
+  }
 
   return (
     <Container>
@@ -52,6 +57,12 @@ const CardOfAllCourse = () => {
                         {val.courseDescription}
                       </Typography>
                     </CardContent>
+                  </CardActionArea>
+                  <CardActionArea className='p-2'>
+                  <Button onClick={()=>enrollHandler(val._id)} variant='contained' color="primary" >Enroll</Button>
+                    
+                   
+
                   </CardActionArea>
                 </Card>
               </Col>
