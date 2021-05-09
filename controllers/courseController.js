@@ -76,3 +76,19 @@ module.exports.getOneCourse__controller = async (req, res, next) => {
     });
   }
 };
+
+module.exports.deleteCourse__Controller = async (req, res, next) => {
+  try {
+    const { courseId } = req.body;
+    console.log(courseId)
+    const course = await CourseModel.findOneAndDelete({ _id: courseId });
+    return res.status(200).json({
+      course,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({
+      error: "Something went wrong",
+    });
+  }
+};

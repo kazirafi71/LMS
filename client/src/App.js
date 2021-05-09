@@ -27,6 +27,8 @@ import StudentInfo from "./pages/Admin/Student/StudentInfo";
 import TeacherInfo from "./pages/Admin/Teacher/TeacherInfo";
 import AllCourses from "./pages/All-Courses/AllCourses";
 import NotFound from "./pages/404NotFoud/NotFound";
+import Libray from "./pages/Library/Libray";
+import Ucam from "./pages/Ucam/Ucam";
 
 const Routing = () => {
   const history = useHistory();
@@ -44,6 +46,12 @@ const Routing = () => {
     <Switch>
       <StudentRoute exact path="/">
         <DashBoard />
+      </StudentRoute>
+      <StudentRoute exact path="/library">
+        <Libray />
+      </StudentRoute>
+      <StudentRoute exact path="/ucam">
+        <Ucam />
       </StudentRoute>
       <TeacherRoute exact path="/teacher-dashboard">
         <TeacherDashboard />

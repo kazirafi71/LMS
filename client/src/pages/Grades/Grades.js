@@ -3,7 +3,7 @@ import React from 'react';
 const Grades = () => {
     return (
         <div>
-            Grades
+            <h2>This page s coming so0n...</h2>
         </div>
     );
 };

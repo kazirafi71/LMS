@@ -47,7 +47,7 @@ module.exports.login__controller = async (req, res, next) => {
 
     if (!userInfo) {
       return res.status(401).json({
-        errors: { userExist: "User not exist" },
+        errors: { userExist: "User not exist Please register and then login again" },
       });
     }
 

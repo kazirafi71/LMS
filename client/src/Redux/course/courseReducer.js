@@ -2,7 +2,8 @@ import { GET__COURSES, UPDATE__COURSE__LIST } from "./courseTypes"
 
 const init={
     courseInfo:[],
-    updateCourseList: false
+    updateCourseList: false,
+    
 }
 
 

@@ -20,7 +20,10 @@ import TablePaginationActions from "@material-ui/core/TablePagination/TablePagin
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCourseInfo } from "../../../../../Redux/course/courseAction";
+import {
+  deleteCourseItem,
+  fetchCourseInfo,
+} from "../../../../../Redux/course/courseAction";
 
 const useStyles = makeStyles({
   table: {
@@ -35,25 +38,26 @@ const useStyles = makeStyles({
 const CourseInfoTable = ({ course }) => {
   const classes = useStyles();
 
-
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
   const courseData = useSelector((state) => state.course.courseInfo);
-  const {updateCourseList} = useSelector((state) => state.course);
-  console.log(updateCourseList);
-  
+  const {updateCourseList}  = useSelector((state) => state.course)
 
-  const updateList =async () => {
-    setData(courseData)
+  console.log(courseData)
+
+ console.log(updateCourseList)
+
+  const updateList = async () => {
+    setData(courseData);
+    //console.log(data)
   };
 
   useEffect(() => {
     dispatch(fetchCourseInfo());
-    updateList()
-  
+    
   }, [course,updateCourseList]);
 
-  //   const classes = useStyles2();
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -67,6 +71,10 @@ const CourseInfoTable = ({ course }) => {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+  };
+  const deleteCourseHandler = (courseId) => {
+    dispatch(deleteCourseItem(courseId))
+    updateList();
   };
   return (
     <Container className={classes.root}>
@@ -93,8 +101,8 @@ const CourseInfoTable = ({ course }) => {
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : data
+              ? courseData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              : courseData
             ).map((row) => (
               <TableRow key={row._id}>
                 <TableCell component="th" scope="row" align="center">
@@ -119,7 +127,7 @@ const CourseInfoTable = ({ course }) => {
                   <IconButton>
                     <EditIcon color="primary" />
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick={() => deleteCourseHandler(row._id)}>
                     <DeleteIcon style={{ color: "red" }} />
                   </IconButton>
                 </TableCell>

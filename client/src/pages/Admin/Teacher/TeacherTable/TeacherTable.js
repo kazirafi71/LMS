@@ -49,6 +49,11 @@ const TeacherTable = () => {
     userList()
   }, []);
 
+  const deleteTeacherHandler=(userId)=>{
+    
+
+  }
+
   //   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -103,7 +108,7 @@ const TeacherTable = () => {
                   <IconButton>
                     <EditIcon color="primary" />
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick={()=>deleteTeacherHandler(row._id)}>
                     <DeleteIcon style={{ color: "red" }} />
                   </IconButton>
                 </TableCell>

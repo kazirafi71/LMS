@@ -39,9 +39,14 @@ const Header = () => {
         {user && (
           <ul>
             {
-              user.role==="Teacher" && <li>
+              user.role==="Teacher" && <> <li>
               <NavLink onClick={toggleClose} to="/teacher-dashboard">Dashboard</NavLink>
             </li>
+            
+           
+
+            </>
+            
             }
             {
               user.role==="Admin" && <> <li >
@@ -78,9 +83,20 @@ const Header = () => {
             <li>
               <NavLink onClick={toggleClose} to="/all-courses">All Courses</NavLink>
             </li>
-           
 
-            <li className="logout__button">
+            {
+              user.role==="Teacher" ?   <li className="">
+              <Button
+                onClick={() => {
+                  localStorage.clear("user");
+                  localStorage.clear("auth_token");
+                  dispatch({ type: "CLEAR__USER" });
+                  history.push("/login");
+                }}
+              >
+                Logout
+              </Button>
+            </li> :  <li className="logout__button">
               <Button
                 onClick={() => {
                   localStorage.clear("user");
@@ -92,6 +108,12 @@ const Header = () => {
                 Logout
               </Button>
             </li>
+
+            }
+           
+           
+
+           
           </ul>
         )}
       </div>
